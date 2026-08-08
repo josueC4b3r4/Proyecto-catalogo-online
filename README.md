@@ -122,46 +122,6 @@ que no modifican los datos reales.
 
 Son 155: 38 de usuarios, 18 del catálogo, 19 del carrito y 80 de pedidos.
 
-## Requisitos funcionales cubiertos
-
-| RF | Descripción | Estado |
-|----|-------------|--------|
-| RF-01 | Autenticación y control de accesos | Completo |
-| RF-02 | Catálogo con filtros por categoría, talla y color | Completo |
-| RF-03 | CRUD del catálogo desde el panel | Completo |
-| RF-04 | Carrito de compras persistente | Completo |
-| RF-05 | Procesamiento del pago | Simulado, sin guardar la tarjeta |
-| RF-06 | Descuento de existencias al comprar | Completo |
-| RF-07 | Estados del pedido y control logístico | Completo |
-| RF-08 | Cupones y descuentos | Fuera de alcance |
-| RF-09 | Historial de compras | Completo sin la descarga en PDF |
-| RF-10 | Reportes estadísticos y gráficas | Fuera de alcance |
-| RF-11 | Recuperación de contraseña por correo | Completo |
-| RF-12 | Gestión del perfil del cliente | Completo |
-| RF-13 | Notificaciones automatizadas | Fuera de alcance |
-| RF-14 | Calificaciones y reseñas | Fuera de alcance |
-| RF-15 | Solicitud de devoluciones | Completo, sin reembolso automático |
-
-Un pedido avanza en un solo sentido: pendiente de pago, pagado, en preparación,
-enviado y entregado. Se puede cancelar mientras no haya salido, y el sistema
-rechaza cualquier salto, como enviar algo que todavía no se ha pagado.
-
-El formulario de pago pide número de tarjeta, vencimiento, código de seguridad
-y titular, y los valida: el número debe pasar el algoritmo de Luhn y la fecha no
-puede estar vencida. De todo eso la base guarda únicamente la marca y los
-últimos cuatro dígitos, igual que hacen las pasarelas reales. El número completo
-y el código de seguridad se descartan al terminar la petición. Los campos llegan
-llenos con la tarjeta de prueba 4242 4242 4242 4242 para que nadie tenga que
-escribir una tarjeta real durante una demostración.
-
-Las devoluciones se piden por producto, no por pedido completo, y solo sobre
-pedidos entregados. Cada renglón admite una sola solicitud: eso lo garantiza un
-índice único en la base, no una comprobación en Python. El administrador acepta
-o rechaza desde el panel y está obligado a escribir una respuesta al cliente.
-
-Los correos de recuperación se imprimen en la terminal en lugar de enviarse,
-porque el proyecto no tiene servidor de correo configurado.
-
 ## Estructura
 
 ```
@@ -182,21 +142,3 @@ propio contenido con `{% block contenido %}`.
 
 Los colores del sitio están definidos como variables al inicio de
 `static/css/estilos.css`. Cambiarlos ahí cambia el sitio completo.
-
-## Estado del proyecto
-
-- [x] Etapa 1: entorno y conexión con MariaDB
-- [x] Etapa 2: usuarios, registro, inicio y cierre de sesión
-- [x] Etapa 3: catálogo de productos
-- [x] Etapa 4: carrito de compras
-- [x] Etapa 5: pedidos y pago simulado
-- [x] Etapa 6: diseño final y datos de demostración
-- [ ] Etapa 7: repaso y preparación de la defensa
-
-## Mejoras futuras
-
-Funciones que quedaron fuera del alcance de esta versión escolar: cupones,
-reseñas, reembolsos automáticos, guías de envío, reportes con gráficas,
-comprobantes en PDF, correos automáticos y pasarelas de pago reales. El pago de
-esta versión es únicamente una simulación y no almacena información real de
-tarjetas.
