@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block titulo %}{{ producto.nombre }}{% endblock %}
+
+{% block contenido %}
+    <p><a href="{% url 'catalogo' %}">&larr; Volver al catálogo</a></p>
+
+    <div class="ficha">
+        <div class="ficha-imagen">
+            <div class="producto-foto">
+                {% if producto.imagen %}
+                    <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+                {% else %}
+                    <div class="sin-imagen">Sin foto</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="ficha-datos">
+            <h1>{{ producto.nombre }}</h1>
+            <p class="categoria">{{ producto.categoria.nombre }}</p>
+            <p class="precio-grande">$ {{ producto.precio }}</p>
+
+            <p>Talla: {{ producto.talla }}</p>
+            <p>Color: {{ producto.color }}</p>
+
+            {% if producto.descripcion %}
+                <p class="descripcion">{{ producto.descripcion|linebreaksbr }}</p>
+            {% endif %}
+
+            {% if producto.stock > 0 %}
+                <p class="disponible">{{ producto.stock }} disponibles</p>
+
+                {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'agregar_al_carrito' producto.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Agregar al carrito</button>
+                    </form>
+                {% else %}
+                    <p><a href="{% url 'login' %}">Inicia sesión para comprar</a></p>
+                {% endif %}
+            {% else %}
+                <p class="agotado">Agotado</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

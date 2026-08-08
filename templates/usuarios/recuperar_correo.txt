@@ -1,0 +1,13 @@
+Hola {{ user.username }}:
+
+Alguien pidió cambiar la contraseña de tu cuenta en Elegancia.
+
+Si fuiste tú, entra a esta dirección para elegir una nueva:
+
+{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
+
+El enlace dura tres horas y solo funciona una vez.
+
+Si no fuiste tú, ignora este mensaje: tu contraseña no cambiará.
+
+Elegancia

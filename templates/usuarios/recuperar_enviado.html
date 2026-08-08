@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Revisa tu correo{% endblock %}
+
+{% block contenido %}
+    <h1>Revisa tu correo</h1>
+
+    <p>Si existe una cuenta con ese correo, ya te enviamos un mensaje con el
+    enlace para cambiar tu contraseña.</p>
+
+    <p class="aviso">Por seguridad no decimos si el correo está registrado o no.
+    Así nadie puede averiguar qué cuentas existen probando direcciones.</p>
+
+    <p><a href="{% url 'login' %}">Volver a iniciar sesión</a></p>
+{% endblock %}

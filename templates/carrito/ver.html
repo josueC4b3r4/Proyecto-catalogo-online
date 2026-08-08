@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Mi carrito{% endblock %}
+
+{% block contenido %}
+    <h1>Mi carrito</h1>
+
+    {% if carrito.items.all %}
+        <table class="tabla">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in carrito.items.all %}
+                    <tr>
+                        <td>{{ item.producto.nombre }}</td>
+                        <td>$ {{ item.producto.precio }}</td>
+                        <td>
+                            <form method="post" action="{% url 'actualizar_cantidad' item.id %}" class="en-linea">
+                                {% csrf_token %}
+                                <input type="number" name="cantidad" value="{{ item.cantidad }}"
+                                       min="1" max="{{ item.producto.stock }}">
+                                <button type="submit">Actualizar</button>
+                            </form>
+                        </td>
+                        <td>$ {{ item.subtotal }}</td>
+                        <td>
+                            <form method="post" action="{% url 'eliminar_del_carrito' item.id %}" class="en-linea">
+                                {% csrf_token %}
+                                <button type="submit" class="peligro">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3"><strong>Total</strong></td>
+                    <td colspan="2"><strong>$ {{ carrito.total }}</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <p><a class="boton" href="{% url 'confirmar_compra' %}">Finalizar compra</a></p>
+    {% else %}
+        <p>Tu carrito está vacío.</p>
+        <p><a href="{% url 'catalogo' %}">Ver el catálogo</a></p>
+    {% endif %}
+{% endblock %}

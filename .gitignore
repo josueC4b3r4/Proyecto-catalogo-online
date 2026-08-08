@@ -1,0 +1,19 @@
+# Entorno virtual
+.venv/
+
+# Variables de entorno (contiene la contrasena de la base de datos)
+.env
+
+# Archivos temporales de Python
+__pycache__/
+*.py[cod]
+
+# Base de datos SQLite (no la usamos, pero por si acaso)
+db.sqlite3
+
+# Imagenes subidas por el administrador
+media/
+
+# Configuracion del editor y herramientas locales
+.vscode/
+.idea/

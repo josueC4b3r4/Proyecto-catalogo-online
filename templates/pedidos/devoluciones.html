@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Mis devoluciones{% endblock %}
+
+{% block contenido %}
+    <h1>Mis devoluciones</h1>
+
+    {% if devoluciones %}
+        <table class="tabla">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Pedido</th>
+                    <th>Motivo</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Respuesta</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for devolucion in devoluciones %}
+                    <tr>
+                        <td>{{ devolucion.detalle.producto.nombre }}</td>
+                        <td>
+                            <a href="{% url 'detalle_pedido' devolucion.detalle.pedido.id %}">
+                                {{ devolucion.detalle.pedido.id }}
+                            </a>
+                        </td>
+                        <td>{{ devolucion.get_motivo_display }}</td>
+                        <td>{{ devolucion.fecha }}</td>
+                        <td><span class="estado">{{ devolucion.get_estado_display }}</span></td>
+                        <td>
+                            {% if devolucion.respuesta %}
+                                {{ devolucion.respuesta }}
+                            {% else %}
+                                <span class="pendiente">En revisión</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No has solicitado ninguna devolución.</p>
+    {% endif %}
+
+    <p><a href="{% url 'mis_pedidos' %}">Volver a mis pedidos</a></p>
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Catálogo{% endblock %}
+
+{% block contenido %}
+    <h1>Catálogo</h1>
+
+    <form method="get" class="filtros">
+        <label>
+            Categoría
+            <select name="categoria">
+                <option value="">Todas</option>
+                {% for categoria in categorias %}
+                    <option value="{{ categoria.id }}"
+                        {% if categoria_elegida == categoria.id|stringformat:"s" %}selected{% endif %}>
+                        {{ categoria.nombre }}
+                    </option>
+                {% endfor %}
+            </select>
+        </label>
+
+        <label>
+            Talla
+            <select name="talla">
+                <option value="">Todas</option>
+                {% for talla in tallas %}
+                    <option value="{{ talla }}" {% if talla_elegida == talla %}selected{% endif %}>
+                        {{ talla }}
+                    </option>
+                {% endfor %}
+            </select>
+        </label>
+
+        <label>
+            Color
+            <select name="color">
+                <option value="">Todos</option>
+                {% for color in colores %}
+                    <option value="{{ color }}" {% if color_elegido == color %}selected{% endif %}>
+                        {{ color }}
+                    </option>
+                {% endfor %}
+            </select>
+        </label>
+
+        <button type="submit">Filtrar</button>
+
+        {% if hay_filtros %}
+            <a href="{% url 'catalogo' %}">Quitar filtros</a>
+        {% endif %}
+    </form>
+
+    <p class="conteo">
+        {{ productos|length }} producto{{ productos|length|pluralize }}
+        {% if hay_filtros %}que coinciden con tu búsqueda{% endif %}
+    </p>
+
+    <div class="productos">
+        {% for producto in productos %}
+            <article class="producto">
+                <a href="{% url 'detalle_producto' producto.id %}">
+                    <div class="producto-foto">
+                        {% if producto.imagen %}
+                            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+                        {% else %}
+                            <div class="sin-imagen">Sin foto</div>
+                        {% endif %}
+                    </div>
+                    <h3>{{ producto.nombre }}</h3>
+                </a>
+                <p class="categoria">{{ producto.categoria.nombre }}</p>
+                <p class="precio">$ {{ producto.precio }}</p>
+                <p class="detalles">Talla {{ producto.talla }} | {{ producto.color }}</p>
+
+                {% if producto.stock > 0 %}
+                    <p class="disponible">{{ producto.stock }} disponibles</p>
+                {% else %}
+                    <p class="agotado">Agotado</p>
+                {% endif %}
+            </article>
+        {% empty %}
+            {% if hay_filtros %}
+                <p>Ningún producto coincide con esos filtros.</p>
+            {% else %}
+                <p>Todavía no hay productos en el catálogo.</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

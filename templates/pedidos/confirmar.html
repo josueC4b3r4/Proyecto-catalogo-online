@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Finalizar compra{% endblock %}
+
+{% block contenido %}
+    <h1>Finalizar compra</h1>
+
+    <h2>Resumen de tu compra</h2>
+
+    <table class="tabla">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in carrito.items.all %}
+                <tr>
+                    <td>{{ item.producto.nombre }}</td>
+                    <td>$ {{ item.producto.precio }}</td>
+                    <td>{{ item.cantidad }}</td>
+                    <td>$ {{ item.subtotal }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3"><strong>Total a pagar</strong></td>
+                <td><strong>$ {{ carrito.total }}</strong></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <form method="post" class="formulario">
+        {% csrf_token %}
+
+        <h2>Datos de entrega</h2>
+
+        {{ form.nombre_completo.errors }}
+        <p>
+            <label for="{{ form.nombre_completo.id_for_label }}">Nombre completo</label>
+            {{ form.nombre_completo }}
+        </p>
+
+        {{ form.telefono.errors }}
+        <p>
+            <label for="{{ form.telefono.id_for_label }}">Teléfono</label>
+            {{ form.telefono }}
+        </p>
+
+        {{ form.direccion.errors }}
+        <p>
+            <label for="{{ form.direccion.id_for_label }}">Dirección de entrega</label>
+            {{ form.direccion }}
+        </p>
+
+        <div class="titulo-pago">
+            <h2>Forma de pago</h2>
+            <span class="candado">Simulación escolar 🔒</span>
+        </div>
+
+        {{ form.metodo_pago.errors }}
+
+        <div class="pago-opciones">
+            {% for opcion in form.metodo_pago %}
+                <div class="pago-opcion">
+                    {{ opcion.tag }}
+                    <label for="{{ opcion.id_for_label }}">{{ opcion.choice_label }}</label>
+                    {% if forloop.first %}
+                        <span class="marcas">VISA · Mastercard · Amex</span>
+                    {% endif %}
+                </div>
+
+                {% if forloop.first %}
+                    <div class="campos-tarjeta">
+                        {{ form_tarjeta.numero.errors }}
+                        <p>
+                            <label for="{{ form_tarjeta.numero.id_for_label }}">Número de tarjeta</label>
+                            {{ form_tarjeta.numero }}
+                        </p>
+
+                        <div class="fila-doble">
+                            <div>
+                                {{ form_tarjeta.expiracion.errors }}
+                                <label for="{{ form_tarjeta.expiracion.id_for_label }}">Vencimiento</label>
+                                {{ form_tarjeta.expiracion }}
+                            </div>
+                            <div>
+                                {{ form_tarjeta.cvv.errors }}
+                                <label for="{{ form_tarjeta.cvv.id_for_label }}">CVC/CVV</label>
+                                {{ form_tarjeta.cvv }}
+                            </div>
+                        </div>
+
+                        {{ form_tarjeta.nombre_tarjeta.errors }}
+                        <p>
+                            <label for="{{ form_tarjeta.nombre_tarjeta.id_for_label }}">Nombre en la tarjeta</label>
+                            {{ form_tarjeta.nombre_tarjeta }}
+                        </p>
+
+                        <p class="nota-tarjeta">De esta tarjeta solo se guardan la marca
+                        y los últimos 4 dígitos. El número completo y el código de
+                        seguridad se descartan.</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <button type="submit">Confirmar compra</button>
+    </form>
+
+    <p class="aviso">El pago de esta tienda es una simulación y no cobra nada. Los
+    campos vienen llenos con una tarjeta de prueba: <strong>no escribas una tarjeta
+    real</strong>.</p>
+
+    <p><a href="{% url 'ver_carrito' %}">&larr; Volver al carrito</a></p>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Mis pedidos{% endblock %}
+
+{% block contenido %}
+    <h1>Mis pedidos</h1>
+
+    {% if pedidos %}
+        <table class="tabla">
+            <thead>
+                <tr>
+                    <th>Número</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pedido in pedidos %}
+                    <tr>
+                        <td>{{ pedido.id }}</td>
+                        <td>{{ pedido.fecha }}</td>
+                        <td><span class="estado">{{ pedido.get_estado_display }}</span></td>
+                        <td>$ {{ pedido.total }}</td>
+                        <td><a href="{% url 'detalle_pedido' pedido.id %}">Ver comprobante</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <p><a href="{% url 'mis_devoluciones' %}">Ver mis devoluciones</a></p>
+    {% else %}
+        <p>Todavía no has hecho ninguna compra.</p>
+        <p><a href="{% url 'catalogo' %}">Ver el catálogo</a></p>
+    {% endif %}
+{% endblock %}

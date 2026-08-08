@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Nueva contraseña{% endblock %}
+
+{% block contenido %}
+    {% if validlink %}
+        <h1>Elige tu nueva contraseña</h1>
+
+        <form method="post" class="formulario">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Guardar contraseña</button>
+        </form>
+    {% else %}
+        <h1>El enlace ya no sirve</h1>
+
+        <p>Este enlace expiró o ya fue usado. Los enlaces de recuperación duran
+        tres horas y solo funcionan una vez.</p>
+
+        <p><a href="{% url 'password_reset' %}">Pedir un enlace nuevo</a></p>
+    {% endif %}
+{% endblock %}

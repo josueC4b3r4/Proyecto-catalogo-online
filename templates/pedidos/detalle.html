@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Pedido {{ pedido.id }}{% endblock %}
+
+{% block contenido %}
+    <h1>Pedido número {{ pedido.id }}</h1>
+
+    <div class="datos-pedido">
+        <p>Fecha: {{ pedido.fecha }}</p>
+        <p>Estado: <span class="estado">{{ pedido.get_estado_display }}</span></p>
+        <p>Forma de pago: {{ pedido.get_metodo_pago_display }}</p>
+        {% if pedido.tarjeta_final %}
+            <p>Tarjeta: {{ pedido.tarjeta_enmascarada }}</p>
+        {% endif %}
+    </div>
+
+    <h2>Datos de entrega</h2>
+
+    <div class="datos-pedido">
+        <p>{{ pedido.nombre_completo }}</p>
+        <p>Teléfono: {{ pedido.telefono }}</p>
+        <p>Dirección: {{ pedido.direccion|linebreaksbr }}</p>
+    </div>
+
+    <h2>Productos</h2>
+
+    <table class="tabla">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Precio pagado</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+                {% if pedido.estado == 'ENTREGADO' %}<th></th>{% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for detalle in pedido.detalles.all %}
+                <tr>
+                    <td>{{ detalle.producto.nombre }}</td>
+                    <td>$ {{ detalle.precio }}</td>
+                    <td>{{ detalle.cantidad }}</td>
+                    <td>$ {{ detalle.subtotal }}</td>
+                    {% if pedido.estado == 'ENTREGADO' %}
+                        <td>
+                            {% if detalle.devolucion %}
+                                <span class="estado">
+                                    Devolución {{ detalle.devolucion.get_estado_display|lower }}
+                                </span>
+                            {% else %}
+                                <a href="{% url 'solicitar_devolucion' detalle.id %}">
+                                    Solicitar devolución
+                                </a>
+                            {% endif %}
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3"><strong>Total</strong></td>
+                <td><strong>$ {{ pedido.total }}</strong></td>
+                {% if pedido.estado == 'ENTREGADO' %}<td></td>{% endif %}
+            </tr>
+        </tfoot>
+    </table>
+
+    <p class="aviso">Este comprobante conserva el precio que pagaste, aunque el
+    producto cambie de precio más adelante.</p>
+
+    <p>
+        <a href="{% url 'mis_pedidos' %}">Mis pedidos</a> |
+        <a href="{% url 'mis_devoluciones' %}">Mis devoluciones</a> |
+        <a href="{% url 'catalogo' %}">Seguir comprando</a>
+    </p>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Solicitar devolución{% endblock %}
+
+{% block contenido %}
+    <h1>Solicitar devolución</h1>
+
+    <div class="datos-pedido">
+        <p>Producto: <strong>{{ detalle.producto.nombre }}</strong></p>
+        <p>Pedido número {{ detalle.pedido.id }}</p>
+        <p>Cantidad: {{ detalle.cantidad }}</p>
+        <p>Pagaste: $ {{ detalle.subtotal }}</p>
+    </div>
+
+    <form method="post" class="formulario">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Enviar solicitud</button>
+        <a href="{% url 'detalle_pedido' detalle.pedido.id %}">Cancelar</a>
+    </form>
+
+    <p class="aviso">Un administrador revisará tu solicitud y verás la respuesta
+    en la sección de devoluciones.</p>
+{% endblock %}
