@@ -1,0 +1,210 @@
+[
+{
+  "model": "catalogo.categoria",
+  "pk": 1,
+  "fields": {
+    "nombre": "Tenis",
+    "activo": true
+  }
+},
+{
+  "model": "catalogo.categoria",
+  "pk": 2,
+  "fields": {
+    "nombre": "Playeras",
+    "activo": true
+  }
+},
+{
+  "model": "catalogo.categoria",
+  "pk": 3,
+  "fields": {
+    "nombre": "Pantalones",
+    "activo": true
+  }
+},
+{
+  "model": "catalogo.categoria",
+  "pk": 4,
+  "fields": {
+    "nombre": "Sudaderas",
+    "activo": true
+  }
+},
+{
+  "model": "catalogo.producto",
+  "pk": 1,
+  "fields": {
+    "nombre": "Tenis Para Hombre Nike Court Vision Low Negro Hm9862-001",
+    "descripcion": "Amas el look clásico del básquetbol de los años 80, pero te atrae la cultura acelerada del deporte actual? Te presentamos los Court Vision Low. Este modelo mantiene el alma de los originales con cuero sintético impecable y revestimientos cosidos, y la zona del tobillo con sensación de suavidad mantiene la elegancia y la comodidad.\r\n\r\nLa parte superior de cuero sintético se suaviza y adquiere un carácter vintage con el uso.\r\nLas perforaciones en la punta y los costados ofrecen una mayor transpirabilidad.\r\nLa suela de goma proporciona una tracción duradera.\r\nEl cuello acolchado de corte low luce elegante y se siente extraordinariamente bien.",
+    "categoria": 1,
+    "precio": "1799.00",
+    "imagen": "productos/TENIS1.jpg",
+    "talla": "27.5",
+    "color": "Negro-Blanco",
+    "stock": 10,
+    "activo": true,
+    "fecha_creacion": "2026-07-30T02:06:06.899Z"
+  }
+},
+{
+  "model": "catalogo.producto",
+  "pk": 2,
+  "fields": {
+    "nombre": "Tenis jordan",
+    "descripcion": "tenis marca jordan de todas las tallas",
+    "categoria": 1,
+    "precio": "2500.00",
+    "imagen": "productos/TENIS2.jpg",
+    "talla": "28.5",
+    "color": "Negro-blanco con rojo",
+    "stock": 4,
+    "activo": true,
+    "fecha_creacion": "2026-07-30T18:14:47.359Z"
+  }
+},
+{
+  "model": "catalogo.producto",
+  "pk": 3,
+  "fields": {
+    "nombre": "Playera básica de algodón",
+    "descripcion": "Playera de algodón peinado, cuello redondo y corte regular. Suave al tacto y resistente al lavado.",
+    "categoria": 2,
+    "precio": "249.00",
+    "imagen": "",
+    "talla": "M",
+    "color": "Blanco",
+    "stock": 25,
+    "activo": true,
+    "fecha_creacion": "2026-07-25T16:00:00Z"
+  }
+},
+{
+  "model": "catalogo.producto",
+  "pk": 4,
+  "fields": {
+    "nombre": "Playera oversize estampada",
+    "descripcion": "Corte holgado con caída amplia y estampado frontal serigrafiado.",
+    "categoria": 2,
+    "precio": "329.00",
+    "imagen": "",
+    "talla": "L",
+    "color": "Negro",
+    "stock": 18,
+    "activo": true,
+    "fecha_creacion": "2026-07-25T22:00:00Z"
+  }
+},
+{
+  "model": "catalogo.producto",
+  "pk": 5,
+  "fields": {
+    "nombre": "Playera de manga larga",
+    "descripcion": "Manga larga con puños elásticos. Ideal para climas frescos.",
+    "categoria": 2,
+    "precio": "389.00",
+    "imagen": "",
+    "talla": "M",
+    "color": "Gris jaspeado",
+    "stock": 12,
+    "activo": true,
+    "fecha_creacion": "2026-07-26T04:00:00Z"
+  }
+},
+{
+  "model": "catalogo.producto",
+  "pk": 6,
+  "fields": {
+    "nombre": "Jeans slim fit",
+    "descripcion": "Mezclilla elástica con corte entallado de la rodilla al tobillo. Cinco bolsillos.",
+    "categoria": 3,
+    "precio": "749.00",
+    "imagen": "",
+    "talla": "32",
+    "color": "Azul índigo",
+    "stock": 15,
+    "activo": true,
+    "fecha_creacion": "2026-07-26T10:00:00Z"
+  }
+},
+{
+  "model": "catalogo.producto",
+  "pk": 7,
+  "fields": {
+    "nombre": "Pantalón cargo",
+    "descripcion": "Pantalón de gabardina con bolsillos laterales y ajuste en el tobillo.",
+    "categoria": 3,
+    "precio": "699.00",
+    "imagen": "",
+    "talla": "34",
+    "color": "Verde militar",
+    "stock": 10,
+    "activo": true,
+    "fecha_creacion": "2026-07-26T16:00:00Z"
+  }
+},
+{
+  "model": "catalogo.producto",
+  "pk": 8,
+  "fields": {
+    "nombre": "Jogger deportivo",
+    "descripcion": "Tejido afelpado por dentro, resorte en la cintura y bolsillos con cierre.",
+    "categoria": 3,
+    "precio": "549.00",
+    "imagen": "",
+    "talla": "M",
+    "color": "Negro",
+    "stock": 20,
+    "activo": true,
+    "fecha_creacion": "2026-07-26T22:00:00Z"
+  }
+},
+{
+  "model": "catalogo.producto",
+  "pk": 9,
+  "fields": {
+    "nombre": "Sudadera con capucha",
+    "descripcion": "Capucha forrada con cordón ajustable y bolsillo canguro. Interior afelpado.",
+    "categoria": 4,
+    "precio": "899.00",
+    "imagen": "",
+    "talla": "L",
+    "color": "Gris Oxford",
+    "stock": 14,
+    "activo": true,
+    "fecha_creacion": "2026-07-27T04:00:00Z"
+  }
+},
+{
+  "model": "catalogo.producto",
+  "pk": 10,
+  "fields": {
+    "nombre": "Sudadera cerrada básica",
+    "descripcion": "Cuello redondo, sin capucha. Puños y cintura con elástico acanalado.",
+    "categoria": 4,
+    "precio": "799.00",
+    "imagen": "",
+    "talla": "M",
+    "color": "Negro",
+    "stock": 16,
+    "activo": true,
+    "fecha_creacion": "2026-07-27T10:00:00Z"
+  }
+},
+{
+  "model": "catalogo.producto",
+  "pk": 11,
+  "fields": {
+    "nombre": "Tenis casual de lona",
+    "descripcion": "Corte de lona con suela de goma vulcanizada. Diseño clásico de uso diario.",
+    "categoria": 1,
+    "precio": "649.00",
+    "imagen": "",
+    "talla": "27",
+    "color": "Blanco",
+    "stock": 9,
+    "activo": true,
+    "fecha_creacion": "2026-07-27T16:00:00Z"
+  }
+}
+]
