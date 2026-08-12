@@ -86,10 +86,9 @@ El archivo `.env` nunca se sube a Git.
 Esto crea las categorías y los productos de ejemplo. Debe responder
 `Installed 15 object(s) from 1 fixture(s)`: 4 categorías y 11 productos.
 
-Las fotos de los productos no están en el repositorio, porque `media/` se
-ignora en Git. Cópialas aparte (memoria USB o Google Drive) dentro de
-`media/productos/`, conservando los nombres `TENIS1.jpg` y `TENIS2.jpg`. Si
-faltan, el catálogo se muestra con las imágenes rotas.
+Las fotos de los productos sí vienen en el repositorio, dentro de
+`media/productos/`, así que no hay que copiar nada aparte. El catálogo se ve
+completo en cuanto termina este paso.
 
 Para volver a exportar los datos más adelante, hay que forzar UTF-8, porque en
 Windows `dumpdata` escribe el archivo con la codificación antigua del sistema y

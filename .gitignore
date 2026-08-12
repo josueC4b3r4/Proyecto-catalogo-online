@@ -11,8 +11,8 @@ __pycache__/
 # Base de datos SQLite (no la usamos, pero por si acaso)
 db.sqlite3
 
-# Imagenes subidas por el administrador
-media/
+# Las fotos de los productos si se suben al repositorio, porque son parte
+# de la entrega y sin ellas el catalogo se ve con las imagenes rotas.
 
 # Configuracion del editor y herramientas locales
 .vscode/
